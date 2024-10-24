@@ -8,7 +8,7 @@
 
 - 1. Part1(a)(b):
  
- - One person(Please finish it as fast as you can. Others' work will depends on you)
+  - One person(Please finish it as fast as you can. Others' work will depends on you)
 
 - 2. Part2&Part3(a)(b):
 
