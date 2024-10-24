@@ -24,3 +24,7 @@
   - Train CNN: ...
 
   - Improve: Lei Mingcong
+
+## 2. Report
+
+- Please also write report for your part!
