@@ -16,4 +16,4 @@
  
 - 3. Part3(c)(d)(e)(f) -> Train biLSTM&biGRU, Train cnn(conv1d maybe), Improve (I think fine-tune a BERT is a good choice. As BERT have it's own embedding layers so this is independent with the whole process)
 
-  - Thress person
+  - Three person(one for )
