@@ -18,11 +18,11 @@ he's: he, is
 how'd: how, did
 how'll: how, will
 how's: how, is
-I'd: I, would
-I'd've: I, would, have
-I'll: I, will
-I'm: I, am
-I've: I, have
+i'd: i, would
+i'd've: i, would, have
+i'll: i, will
+i'm: i, am
+i've: i, have
 it'd: it, would
 it'd've: it, would, have
 it'll: it, will
