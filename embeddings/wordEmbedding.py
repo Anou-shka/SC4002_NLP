@@ -1,7 +1,6 @@
 import numpy as np
 import torch
 from datasets import load_dataset
-from torchtext.vocab import GloVe
 from torch.nn.utils.rnn import pad_sequence
 from normalization import normalize_words
 import random
@@ -10,9 +9,8 @@ random.seed(19260817)
 np.random.seed(19260817)
 
 class CustomTokenizer:
-    def __init__(self, dimension=100):
+    def __init__(self, dimension=100, glove_path="glove.6B.100d.txt"):
         self.dimension = dimension
-        self.glove = GloVe(name='6B', dim=self.dimension)
         self.tokens = {}
         self.token_to_id = {}
         self.embeddings = [np.zeros(self.dimension)]  # PAD token embedding
@@ -24,7 +22,20 @@ class CustomTokenizer:
         self.embeddings.append(np.random.normal(0, 0.1, (self.dimension,)))
         self.tokens["<UNK>"] = self.unk_token_id
         self.token_to_id[self.unk_token_id] = "<UNK>"
-    
+
+        # Load GloVe embeddings from file
+        self.glove = self.load_glove_embeddings(glove_path)
+
+    def load_glove_embeddings(self, glove_path):
+        glove_embeddings = {}
+        with open(glove_path, 'r', encoding='utf-8') as f:
+            for line in f:
+                values = line.split()
+                word = values[0]
+                vector = np.array(values[1:], dtype=np.float32)
+                glove_embeddings[word] = vector
+        return glove_embeddings
+
     def build_vocab(self, data):
         # First pass: collect all normalized tokens
         all_normalized_tokens = set()
@@ -36,13 +47,13 @@ class CustomTokenizer:
 
         # Sort for deterministic ordering
         vocab = sorted(all_normalized_tokens)
-        self.oov = {word for word in vocab if word not in self.glove.stoi}
+        self.oov = {word for word in vocab if word not in self.glove}
         count = 2  # Start from 2 as 0 and 1 are reserved for PAD and UNK
         for word in vocab:
-            if word in self.glove.stoi:
+            if word in self.glove:
                 self.tokens[word] = count
                 self.token_to_id[count] = word
-                self.embeddings.append(self.glove.vectors[self.glove.stoi[word]].numpy())
+                self.embeddings.append(self.glove[word])
                 count += 1
             else:
                 # For tokens not in GloVe, initialize with random embedding
@@ -123,7 +134,7 @@ if __name__ == '__main__':
     train_dataset = dataset['train']
     train_texts = [example['text'] for example in train_dataset]
 
-    tokenizer = CustomTokenizer(dimension=100)
+    tokenizer = CustomTokenizer(dimension=100, glove_path="glove.6B.100d.txt")
     tokenizer.build_vocab(train_texts)
 
     encoding = tokenizer.encode("Check the price of the new gadget ($199) at 'Tech-Store', " \
