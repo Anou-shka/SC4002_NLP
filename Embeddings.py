@@ -154,6 +154,7 @@ if __name__ == "__main__":
     # 使用 Tokenizer 编码文本批次，返回pt格式
     encoded_tensor = tokenizer.encode(texts, max_length=12, return_tensors="pt")
     print("Encoded Batch (Torch):", encoded_tensor)
+    print("shape:", encoded_tensor["input_ids"].shape, encoded_tensor["attention_mask"].shape)
 
     # 使用 Tokenizer 解码批次
     decoded_texts = tokenizer.decode(encoded_tensor["input_ids"])
