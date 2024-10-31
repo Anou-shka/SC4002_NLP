@@ -40,7 +40,7 @@ class GloveTokenizer:
                                         batch_first=True,
                                         padding_value=self.word_index[self.pad_token])
 
-        # 自动生成 attention_mask
+        # 自动生成 attention_mask，注意此处返回一个二维张量
         attention_mask = (input_ids_padded != self.word_index[self.pad_token]).long()
 
         # 若指定了 max_length，进行截断或再次填充
@@ -56,10 +56,11 @@ class GloveTokenizer:
                 mask_padding = torch.zeros((attention_mask.shape[0], pad_size), dtype=torch.long)
                 attention_mask = torch.cat([attention_mask, mask_padding], dim=1)
 
-        # 返回指定格式的结果
+        # 返回格式改为二维张量
         if return_tensors == "pt":
             return {"input_ids": input_ids_padded, "attention_mask": attention_mask}
-        return {"input_ids": input_ids_padded.tolist(), "attention_mask": attention_mask.tolist()}
+        else:
+            return {"input_ids": input_ids_padded.tolist(), "attention_mask": attention_mask.tolist()}
 
     def decode(self, token_ids_batch, skip_special_tokens=False):
         # 检查输入是否为二维 Tensor
