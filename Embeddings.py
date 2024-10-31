@@ -166,3 +166,26 @@ if __name__ == "__main__":
     embedded_output = embedding_layer(encoded_tensor["input_ids"])
     print("Embedded Output Shape (Batch):", embedded_output.shape)
     print("Embedded Output Shape (Batch):", embedded_output)
+    
+    # 验证嵌入是否对齐
+    test_word = "text"  # 要测试的单词
+    if test_word in tokenizer.word_index:
+        test_index = tokenizer.word_index[test_word]
+        
+        # 从 GloVe 原始嵌入中获取该单词的向量
+        glove_vector = torch.tensor(tokenizer.embeddings_index[test_word], dtype=torch.float32)
+        
+        # 从 nn.Embedding 中获取该单词的向量
+        embedding_vector = embedding_layer.embedding.weight[test_index]
+        
+        # 打印并比较两个向量
+        print(f"GloVe vector for '{test_word}':", glove_vector)
+        print(f"Embedding vector for '{test_word}':", embedding_vector)
+        
+        # 检查是否对齐
+        if torch.allclose(glove_vector, embedding_vector, atol=1e-6):
+            print(f"The embedding for '{test_word}' is correctly aligned with the original GloVe vector.")
+        else:
+            print(f"The embedding for '{test_word}' is NOT aligned with the original GloVe vector.")
+    else:
+        print(f"The word '{test_word}' is not in the tokenizer's vocabulary.")
