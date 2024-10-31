@@ -8,12 +8,14 @@ class GloveTokenizer:
         # 加载 GloVe 词向量并创建词典
         self.embeddings_index = self._load_glove_embeddings(glove_file_path)
         self.pad_token = pad_token
+        self.pad_token_id = 0
+        self.unk_token_id = 1
         self.unk_token = unk_token
         
         # 初始化词汇索引表，并确保特殊标记
         self.word_index = {word: idx for idx, word in enumerate(self.embeddings_index.keys(), start=2)}
-        self.word_index[self.pad_token] = 0
-        self.word_index[self.unk_token] = 1
+        self.word_index[self.pad_token] = self.pad_token_id
+        self.word_index[self.unk_token] = self.unk_token_id
         self.index_word = {idx: word for word, idx in self.word_index.items()}
 
     def _load_glove_embeddings(self, glove_file_path):
