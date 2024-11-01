@@ -161,7 +161,7 @@ class GloveEmbedding(nn.Module):
 
 if __name__ == "__main__":
     # Test script
-    glove_file_path = "glove.6B.100d.txt"
+    glove_file_path = "C:\\Users\\Administrator\\Desktop\\glove\\glove.6B.100d.txt"
 
     # Initialize Tokenizer and Embedding layer
     tokenizer = GloveTokenizer(glove_file_path)
