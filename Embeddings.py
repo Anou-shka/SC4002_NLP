@@ -114,6 +114,16 @@ class GloveTokenizer:
         # Return single or list of decoded texts
         return all_texts if len(all_texts) > 1 else all_texts[0]
 
+class GloveTokenizerNoSub(GloveTokenizer):
+    def __init__(self, glove_file_path, pad_token="<PAD>", unk_token="<UNK>"):
+        super().__init__(glove_file_path, pad_token, unk_token)
+
+    def _tokenize_with_subwords(self, word):
+        if word in self.word_index:
+            return [self.word_index[word]]
+        else:
+            return [self.unk_token_id]
+
 class GloveEmbedding(nn.Module):
     def __init__(self, glove_file_path, embedding_dim=100, trainable=False, pad_token="<PAD>", unk_token="<UNK>"):
         super(GloveEmbedding, self).__init__()
@@ -158,13 +168,7 @@ class GloveEmbedding(nn.Module):
         # Perform embedding lookup
         return self.embedding(x)
 
-
-if __name__ == "__main__":
-    # Test script
-    glove_file_path = "C:\\Users\\Administrator\\Desktop\\glove\\glove.6B.100d.txt"
-
-    # Initialize Tokenizer and Embedding layer
-    tokenizer = GloveTokenizer(glove_file_path)
+def test(tokenizer):
     embedding_layer = GloveEmbedding(glove_file_path, embedding_dim=100)
 
     # Example batch of texts
@@ -219,3 +223,15 @@ if __name__ == "__main__":
             print(f"The embedding for '{test_word}' is NOT aligned with the original GloVe vector.")
     else:
         print(f"The word '{test_word}' is not in the tokenizer's vocabulary.")
+
+
+
+if __name__ == "__main__":
+    # Test script
+    glove_file_path = "glove.6B.100d.txt"
+
+    # Initialize Tokenizer and Embedding layer
+    tokenizer = GloveTokenizer(glove_file_path)
+    test(tokenizer)
+    tokenizer_no_sub = GloveTokenizerNoSub(glove_file_path)
+    test(tokenizer_no_sub)
