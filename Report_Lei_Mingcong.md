@@ -63,12 +63,11 @@ Compared with the RNN model, the BiGRU and the BiLSTM perform better. This may b
     Figure 4. Structure of our BERT model
 </center>
 
-&emsp; To further improve the model, we switch from RNN-base model to Transformer-based model. The sentiment analysis task is a binary classify task with a sequence input and a scaler output. To fit the task, we decide to use BERT-like encoder only Transformer models as we do not need the decoder to generate sequence. Moreover, as the training set is reletively small, we decide to fine-tune on a pre-trained BERT-like model to gain better performance.
+&emsp; To further improve the model, we switch from an RNN-base model to a Transformer-based model. The sentiment analysis task is a binary classification task with a sequence input and a scaler output. To fit the task, we decided to use a BERT-like encoder-only Transformer model, as we do not need the decoder to generate the sequence. Moreover, as the training set is relatively small, we decided to fine-tune a pre-trained BERT-like model to gain better performance.
 
-&emsp; In this section, we decide to use DeBERTaV3 model from Microsoft as pre-trained model. We add a linear projection layer after the output Linear layer of DeBERTaV3 to project the output vector to a scaler y as the model prediction. As DeBERTaV3 provide a special token "[CLS]" as the first token of the input sequence for classifier, we only add the linear projection layer after the output latent vector corresponding to "[CLS]" token. This is default settings of DeBERTaV3 model. The detail structure is shown in Fig. 4. Moveover, DeBERTaV3 model have more improvement comparing with our previous RNN-based model beyond change the model architecture to Transformer. The pretrained model provide subword tokenize algorithm: Word Piece tokenization as advanced tokenize algorithm.
+&emsp; In this section, we decide to use Microsoft's DeBERTaV3 model as a pre-trained model. We add a linear projection layer after the output Linear layer of DeBERTaV3 to project the output vector to a scaler y as the model prediction. As DeBERTaV3 provides a special token "[CLS]" as the first token of the input sequence for the classifier, we only add the linear projection layer after the output latent vector corresponding to the "[CLS]" token. This is the default setting of the DeBERTaV3 model. The detailed structure is shown in Fig. 4. Moreover, the DeBERTaV3 model has more improvement compared with our previous RNN-based model beyond changing the model architecture to a Transformer. The pre-trained model provides a subword tokenize algorithm: Word Piece tokenization as an advanced tokenize algorithm.
 
-&emsp; The training setting is similar to previous approach. We use binary cross-entropy loss as criteria, AdamW as optimizer, Cosine scheduler with warm up as learning rate scheduler. We adopted mini-batch training. As BERT model may not face severe gradient explosion problem comparing with RNN-base model, we do not utilze the gradient clip mechanism. In addition, the batch-wise padding algorithm is same as previous appoarch.
-
+&emsp; The training setting is similar to the previous approach. We use the binary cross-entropy loss as criteria, AdamW as an optimizer, and the Cosine scheduler with warm-up as a learning rate scheduler. We adopted mini-batch training. As the BERT model may not face severe gradient explosion problems compared with the RNN-base model, we do not utilize the gradient clip mechanism. In addition, the batch-wise padding algorithm is the same as the previous approach.
 &emsp; The fine-tuning hyper-paramater settings are shown below:
 
 - training epochs: 2
@@ -77,7 +76,7 @@ Compared with the RNN model, the BiGRU and the BiLSTM perform better. This may b
 - weight decay rate: 1e-7
 - warm-up ratio: 0.05
 
-Comparing with train from scretched RNN-base model shown previously, our fine-tune settings use fewer training epochs and smaller warm-up ratio as the pre-trained model was already learned some word meanings. We choose lower learning rate as the DeBERTV3 model has more paramater than previouse RNN-base model. In addition, we use smaller batch size to save GPU memory.
+Compared with the train from the scratched RNN-base model shown previously, our fine-tuned settings use fewer training epochs and a smaller warm-up ratio as the pre-trained model has already learned some word meanings. We chose a lower learning rate as the DeBERTV3 model has more parameters than the previous RNN-based model. In addition, we use smaller batch sizes to save GPU memory.
 
 <center>
     <img src = "./image/Trainging_curve_BERT.png" width = 60%>
@@ -86,7 +85,7 @@ Comparing with train from scretched RNN-base model shown previously, our fine-tu
 </center>
 
 
-&emsp; The training curve is shown in Fig. 5. The result accuracy on Test set is **0.9024**. The outcome shows that the fine-tuned DeBERTaV3 siginificantly out perform all previous model. This may becasue DeBERTaV3 is Transformer-based model with more paramaters and it has already pre-trained on large dataset so it can learn better via our small scale dataset.
+&emsp; The training curve is shown in Fig. 5. The resulting accuracy on the Test set is **0.9024**. The outcome shows that the fine-tuned DeBERTaV3 significantly outperforms all previous models. This may be because DeBERTaV3 is a transformer-based model with more parameters, and it has already been pre-trained on a large dataset so that it can learn better via our small-scale dataset.
 
 
 
