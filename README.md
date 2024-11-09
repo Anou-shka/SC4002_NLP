@@ -1,30 +1,17 @@
 # SC4002_NLP
 
-## 1. Our tasks
+## 3(c) `train_bilstm_demo.ipynb` and ``train_bigru_demo.ipynb``
 
-- 0. Part1(c):
+- 1. Please download `glove.6B.100d.txt` from the website: [stanford glove](https://nlp.stanford.edu/projects/glove/)
 
-  - Top priority
+- 2. copy your directory to `GLOVE_PATH` in the front of the jupytor notebook 
 
-- 1. Part1(a)(b):
- 
-  - Dai Zhancheng
+- 3. You need to install `pyTorch`, `Matplotlib`, `Numpy`, `Pandas`, `Transformers` and `Seaborn` package
 
-- 2. Part2&Part3(a)(b) -> Train/Improve RNN:
- 
-  - Train RNN: ...
+- 4. Then run the code
 
-  - Improve RNN: ...
- 
-- 3. Part3(c)(d)(e)(f) -> Train biLSTM&biGRU, Train cnn(conv1d maybe), Improve (I think fine-tune a BERT is a good choice. As BERT have it's own embedding layers so this is independent with the whole process)
+## 3(e) `./BERT/train_bert.ipynb`
 
- 
-  - Train biGRU & biLSTM (They are basically the same structure): ...
+- 1. Please download `pyTorch`, `Matplotlib`, `Numpy`, `Pandas`, `Transformers` and `Seaborn` package
 
-  - Train CNN: ...
-
-  - Improve: Lei Mingcong
-
-## 2. Report
-
-- Please also write report for your part!
+- 4. Then run the code
