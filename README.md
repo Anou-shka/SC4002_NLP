@@ -7,6 +7,14 @@
 - The file SC4002 CNN with Pytorch is failed code, please ignore this file
 
 - The file SC4002 Natural Language Processing CNN is done via tensorflow instead of Pytorch, please ignore this file
+
+## 1 "Embeddings.py", "nomalization.py" and "tester.py"
+
+- 1. Please download `glove.6B.100d.txt` from the website: [stanford glove](https://nlp.stanford.edu/projects/glove/)
+ 
+- 2. Download the necessary libraries.
+ 
+- 3. Run tester.py to test the vocabulary of the given training dataset.
   
 ## 2(a), 2(b) "Part-2a&b.ipynb"
 
