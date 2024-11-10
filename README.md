@@ -1,5 +1,7 @@
 # SC4002_NLP
 
+- Please use python 3.10 or 3.11 for testing
+
 ## 3(c) `train_bilstm_demo.ipynb` and ``train_bigru_demo.ipynb``
 
 - 1. Please download `glove.6B.100d.txt` from the website: [stanford glove](https://nlp.stanford.edu/projects/glove/)
