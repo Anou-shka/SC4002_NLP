@@ -2,6 +2,8 @@
 
 - Please use python 3.10 or 3.11 for testing
 
+- The directory `Old implementation` is for code that is discord, please ignore this directory
+
 ## 2(a), 2(b) "Part-2a&b.ipynb"
 
 - 1. Please download `glove.6B.100d.txt` from the website: [stanford glove](https://nlp.stanford.edu/projects/glove/)
