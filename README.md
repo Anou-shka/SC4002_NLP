@@ -2,6 +2,16 @@
 
 - Please use python 3.10 or 3.11 for testing
 
+## 2(a), 2(b) "Part-2a&b.ipynb"
+
+- 1. Please download `glove.6B.100d.txt` from the website: [stanford glove](https://nlp.stanford.edu/projects/glove/)
+
+- 2. copy your directory to `GLOVE_PATH` in the front (first cell) of the jupytor notebook
+
+- 3. Please Download the necessary libraries.
+
+- 4. Run all the cells. 
+
 ## 3(a),3(b) "Part-3a.ipynb" and "Part-3b.ipynb"
 
 - 1. Please download `glove.6B.100d.txt` from the website: [stanford glove](https://nlp.stanford.edu/projects/glove/)
