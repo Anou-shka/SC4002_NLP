@@ -4,6 +4,10 @@
 
 - The directory `Old implementation` is for code that is discord, please ignore this directory
 
+- The file SC4002 CNN with Pytorch is failed code, please ignore this file
+
+- The file SC4002 Natural Language Processing CNN is done via tensorflow instead of Pytorch, please ignore this file
+  
 ## 2(a), 2(b) "Part-2a&b.ipynb"
 
 - 1. Please download `glove.6B.100d.txt` from the website: [stanford glove](https://nlp.stanford.edu/projects/glove/)
